@@ -1,0 +1,13 @@
+<div class="post-list-container">
+  <h4>Posts</h4>
+  <div class="post-thumbnail" *ngFor="let post of dbService.posts | async">
+
+    <h4>{{post.title}}</h4>
+    <p>{{post.subject}}</p>
+    <p [innerHTML]="post.text"></p>
+    <p >{{post.key}}</p>
+  </div>
+</div>
+
+
+
