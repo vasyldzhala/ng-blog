@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 import { UserService } from '../shared/user.service';
 
 @Injectable()
@@ -12,14 +12,14 @@ export class CreateGuard implements CanActivate {
 
   canActivate(): Promise<boolean> {
 
-    return new Promise( (resolve, reject) => {
+    return new Promise( ( resolve, reject ) => {
       return this.userService.getCurrentUser()
         .then( user => {
-          return resolve(true);
+          return resolve( true );
         })
         .catch(err => {
-          this.router.navigate(['/login']);
-          return resolve(false);
+          this.router.navigate( ['/login'] );
+          return resolve( false );
         });
     });
   }

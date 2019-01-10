@@ -1,9 +1,11 @@
 <div class="form-container">
+
   <h2>
     <img class="user-image" src={{user.image}} alt="">
     Welcome
     <span *ngIf="user.name">, {{user.name}}</span>!
   </h2>
+
   <div class="form-group">
     <p>Your provider: {{user.provider}}</p>
     <p>Your email: {{user.email}}</p>
@@ -24,7 +26,7 @@
       <div class="form-group">
         <button
           class="btn btn-primary"
-          (click)="save(profileForm.value)"
+          (click)="updateProfile(profileForm.value)"
         >
           Update profile
         </button>

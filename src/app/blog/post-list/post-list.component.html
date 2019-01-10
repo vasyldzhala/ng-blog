@@ -1,6 +1,7 @@
 <main class="blog-container">
 
   <aside class="post-list-container">
+
     <div class="post-thumbnail" *ngFor="let post of dbService.posts | async">
 
       <a [routerLink]="[post.key]">
@@ -14,8 +15,8 @@
       </a>
       <hr>
 
-
     </div>
+
   </aside>
 
   <section class="post">

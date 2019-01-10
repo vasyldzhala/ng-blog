@@ -1,26 +1,26 @@
-import {Component, OnInit} from '@angular/core';
-import {Router, Params} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../../shared/auth.service';
-import {UserService} from '../../shared/user.service';
-import avatar from '../../../assets/img/account_image.png';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../shared/auth.service';
+import { UserService } from '../../shared/user.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+
+export class RegisterComponent {
   registerForm: FormGroup;
   errorMessage = '';
   successMessage = '';
   facebookErrorMessage = '';
   googleErrorMessage = '';
 
-  constructor(public auth: AuthService,
-              private router: Router,
-              private fb: FormBuilder,
-              private userService: UserService) {
+  constructor( public auth: AuthService,
+               private router: Router,
+               private fb: FormBuilder,
+               private userService: UserService ) {
     this.createForm();
   }
 
@@ -31,21 +31,18 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  registerUser(user) {
-    console.log(user);
-    this.auth.doRegister(user)
+  registerUser( user ) {
+    this.auth.doRegister( user )
       .then(res => {
         this.errorMessage = '';
         this.successMessage = 'Your account has been created';
         this.userService.updateCurrentUser({
           name: 'Anonymous',
-          image: avatar
+          image: 'assets/img/account_image.png'
         }).then(data => {
-          console.log(data);
           this.router.navigate(['/welcome']);
         }).catch(err => console.log(err));
       }, err => {
-        console.log(err);
         this.errorMessage = err.message;
         this.successMessage = '';
       });
@@ -54,11 +51,9 @@ export class RegisterComponent implements OnInit {
   tryFacebookLogin() {
     this.auth.doFacebookLogin()
       .then(res => {
-        console.log(res);
         this.router.navigate(['/welcome']);
       })
       .catch(err => {
-        console.log(err);
         this.facebookErrorMessage = err.message;
       });
   }
@@ -66,16 +61,11 @@ export class RegisterComponent implements OnInit {
   tryGoogleLogin() {
     this.auth.doGoogleLogin()
       .then(res => {
-        console.log(res);
         this.router.navigate(['/welcome']);
       })
       .catch(err => {
-        console.log(err);
         this.googleErrorMessage = err.message;
       });
-  }
-
-  ngOnInit() {
   }
 
 }

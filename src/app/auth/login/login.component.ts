@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../../shared/auth.service';
-import {Router} from '@angular/router';
+import { Component } from '@angular/core';
+import { AuthService } from '../../shared/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+
+export class LoginComponent {
   user = {
     name: '',
     email: '',
@@ -18,20 +19,14 @@ export class LoginComponent implements OnInit {
   facebookErrorMessage = '';
   googleErrorMessage = '';
 
-  constructor(
-    public auth: AuthService,
-    private router: Router,
-  ) {}
+  constructor( public auth: AuthService,
+               private router: Router ) {}
 
-  ngOnInit() {
-  }
-
-  loginUser(value) {
-    this.auth.doLogin(value)
+  loginUser( value ) {
+    this.auth.doLogin( value )
       .then(res => {
         this.router.navigate(['/welcome']);
       }, err => {
-        console.log(err);
         this.errorMessage = err.message;
       });
   }
@@ -41,8 +36,7 @@ export class LoginComponent implements OnInit {
       .then(res => {
         this.router.navigate(['/welcome']);
       })
-      .catch( err => {
-        console.log(err);
+      .catch(err => {
         this.facebookErrorMessage = err.message;
       });
   }
@@ -52,8 +46,7 @@ export class LoginComponent implements OnInit {
       .then(res => {
         this.router.navigate(['/welcome']);
       })
-      .catch( err => {
-        console.log(err);
+      .catch(err => {
         this.googleErrorMessage = err.message;
       });
   }

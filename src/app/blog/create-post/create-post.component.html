@@ -1,6 +1,9 @@
 <div class="main-content-container">
+
   <div class="create-form-container">
+
     <h2>Create New Post!</h2>
+
     <form novalidate (ngSubmit)="publishPost(postForm)" [formGroup]="postForm">
 
       <div class="form-group">
@@ -9,7 +12,8 @@
           type="text"
           class="form-control"
           placeholder="Enter post title"
-          formControlName="title">
+          formControlName="title"
+        >
       </div>
 
       <div class="form-group">
@@ -17,8 +21,9 @@
         <input
           type="text"
           class="form-control"
-          placeholder="Enter cuple words about theme"
-          formControlName="subject">
+          placeholder="Enter couple words about theme"
+          formControlName="subject"
+        >
       </div>
 
       <div class="form-group">
@@ -27,7 +32,8 @@
           type="text"
           class="form-control"
           placeholder="Main thumbnail image URL"
-          formControlName="image">
+          formControlName="image"
+        >
       </div>
 
       <div class="form-group">
@@ -55,6 +61,8 @@
       </div>
 
     </form>
+
   </div>
+
 </div>
 

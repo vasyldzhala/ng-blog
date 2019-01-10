@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {AngularFirestore} from 'angularfire2/firestore';
-import {AngularFireAuth} from 'angularfire2/auth';
+import { Injectable } from '@angular/core';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 @Injectable()
@@ -16,11 +16,11 @@ export class UserService {
 
   currentUser: any = {...this.defaultUser};
 
-  constructor(public db: AngularFirestore,
-              public afAuth: AngularFireAuth) {
+  constructor ( public db: AngularFirestore,
+                public afAuth: AngularFireAuth ) {
   }
 
-  setCurrentUser(user) {
+  setCurrentUser( user ) {
     this.currentUser.name = user.displayName;
     this.currentUser.email = user.email;
     this.currentUser.provider = user.providerData[0].providerId;
@@ -29,28 +29,28 @@ export class UserService {
   }
 
   getCurrentUser() {
-    return new Promise<any>((resolve, reject) => {
+    return new Promise<any>(( resolve, reject ) => {
       firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-          this.setCurrentUser(user);
-          resolve(user);
+        if ( user ) {
+          this.setCurrentUser( user );
+          resolve( user );
         } else {
-          this.currentUser = {...this.defaultUser};
-          reject('No user logged in');
+          this.currentUser = { ...this.defaultUser };
+          reject( 'No user logged in' );
         }
       });
     });
   }
 
-  updateCurrentUser(value) {
-    return new Promise<any>((resolve, reject) => {
+  updateCurrentUser( value ) {
+    return new Promise<any>(( resolve, reject ) => {
       const user = firebase.auth().currentUser;
       user.updateProfile({
         displayName: value.name,
         photoURL: value.image
       }).then(res => {
-        resolve(res);
-      }, err => reject(err));
+        resolve( res );
+      }, err => reject( err ));
     });
   }
 }

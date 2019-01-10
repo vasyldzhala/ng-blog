@@ -1,5 +1,7 @@
 <div class="main-content-container">
+
   <div class="form-container">
+
     <h2>Register</h2>
 
     <form novalidate [formGroup]="registerForm">
@@ -21,7 +23,8 @@
           class="form-control"
           type="password"
           placeholder="Your password"
-          formControlName="password">
+          formControlName="password"
+        >
         <label class="error">{{errorMessage}}</label>
         <label class="success">{{successMessage}}</label>
       </div>

@@ -1,8 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Observable} from 'rxjs/index';
-import {UserService} from '../../shared/user.service';
-import {DatabaseService} from '../../shared/database.service';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../../shared/user.service';
+import { DatabaseService } from '../../shared/database.service';
 
 @Component({
   selector: 'app-create-post',
@@ -13,7 +12,6 @@ import {DatabaseService} from '../../shared/database.service';
 export class CreatePostComponent implements OnInit {
 
   postForm: FormGroup;
-  posts: Observable<any[]>;
 
   constructor(private fb: FormBuilder,
               private userService: UserService,
@@ -29,7 +27,7 @@ export class CreatePostComponent implements OnInit {
     });
   }
 
-  publishPost(postForm) {
+  publishPost( postForm ) {
     const data = {
       ...postForm.value,
       author: this.userService.currentUser,
@@ -37,6 +35,6 @@ export class CreatePostComponent implements OnInit {
     };
     this.dbService.postData('/posts', data)
       .then(res => postForm.reset(),
-        err => console.log(err));
+        err => console.log( err ));
   }
 }
