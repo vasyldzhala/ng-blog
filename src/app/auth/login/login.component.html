@@ -1,81 +1,84 @@
-<div class="form-container">
-  <h2>Login</h2>
+<div class="main-content-container">
+  <div class="form-container">
+    <h2>Login</h2>
 
-  <form novalidate #loginForm="ngForm">
+    <form novalidate #loginForm="ngForm">
 
-    <h4>Login with email address</h4>
-    <div class="form-group">
-      <label for="email">Email adress</label>
-      <input
-        class="form-control"
-        id="email"
-        type="text"
-        placeholder="Your email"
-        name="email"
-        required
-        [ngModel]="user.email"
-      >
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input
-        class="form-control"
-        id="password"
-        type="password"
-        placeholder="Your password"
-        name="password"
-        required
-        [ngModel]="user.password"
-      >
-      <label class="error">{{errorMessage}}</label>
-      <label class="success">{{successMessage}}</label>
-    </div>
+      <h4>Login with email address</h4>
+      <div class="form-group">
+        <label for="email">Email adress</label>
+        <input
+          class="form-control"
+          id="email"
+          type="text"
+          placeholder="Your email"
+          name="email"
+          required
+          [ngModel]="user.email"
+        >
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          class="form-control"
+          id="password"
+          type="password"
+          placeholder="Your password"
+          name="password"
+          required
+          [ngModel]="user.password"
+        >
+        <label class="error">{{errorMessage}}</label>
+        <label class="success">{{successMessage}}</label>
+      </div>
 
-    <div class="form-group">
-      <button
-        class="btn btn-primary btn-block"
-        type="submit"
-        [disabled]="loginForm.invalid"
-        (click)="loginUser(loginForm.value)"
-      >
-        Login
-      </button>
-    </div>
+      <div class="form-group">
+        <button
+          class="btn btn-primary btn-block"
+          type="submit"
+          [disabled]="loginForm.invalid"
+          (click)="loginUser(loginForm.value)"
+        >
+          Login
+        </button>
+      </div>
 
-    <h4>Login with social media accounts</h4>
-    <div class="form-group">
-      <button
-        class="btn btn-dark btn-block"
-        (click)="tryFacebookLogin(loginForm.value)"
-      >
-        Login with Facebook account
-      </button>
-      <label class="error">{{facebookErrorMessage}}</label>
-    </div>
+      <h4>Login with social media accounts</h4>
+      <div class="form-group">
+        <button
+          class="btn btn-dark btn-block"
+          (click)="tryFacebookLogin(loginForm.value)"
+        >
+          Login with Facebook account
+        </button>
+        <label class="error">{{facebookErrorMessage}}</label>
+      </div>
 
-    <div class="form-group">
-      <button
-        class="btn btn-danger btn-block"
-        (click)="tryGoogleLogin(loginForm.value)"
-      >
-        Login with Google account
-      </button>
-      <label class="error">{{googleErrorMessage}}</label>
-    </div>
+      <div class="form-group">
+        <button
+          class="btn btn-danger btn-block"
+          (click)="tryGoogleLogin(loginForm.value)"
+        >
+          Login with Google account
+        </button>
+        <label class="error">{{googleErrorMessage}}</label>
+      </div>
 
-    <h4>You don't have account yet? </h4>
-    <div class="form-group">
-      <p>
-        Please,
-        <a routerLink="/register">
-          Register
-        </a>
-        to create.
-      </p>
-    </div>
+      <h4>You don't have account yet? </h4>
+      <div class="form-group">
+        <p>
+          Please,
+          <a routerLink="/register">
+            Register
+          </a>
+          to create.
+        </p>
+      </div>
 
-  </form>
+    </form>
+  </div>
 </div>
+
 
 
 

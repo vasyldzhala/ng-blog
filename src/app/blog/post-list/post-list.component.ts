@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {DatabaseService} from '../../shared/database.service';
+import { DatabaseService } from '../../shared/database.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-list',
@@ -8,25 +9,17 @@ import {DatabaseService} from '../../shared/database.service';
 })
 export class PostListComponent implements OnInit {
 
-  constructor(public dbService: DatabaseService) { }
+  constructor(private router: Router,
+              public dbService: DatabaseService) {
+  }
 
   ngOnInit() {
-    this.dbService.posts.subscribe(data => console.log(data));
 
-    // this.dbService.posts.subscribe(
-    //   items => {
-    //     const unsortedList = [];
-    //     items.forEach(el => {
-    //       console.log(el.key);
-    //       console.log(el.payload.val());
-    //       const { payload, key } = el;
-    //       const item = payload.toJSON();
-    //       unsortedList.push({...item, key});
-    //     });
-
-        // this.todoListArray = this.sortTodoList(unsortedList);
-        // console.log('Todos', this.todoListArray);
-      // });
+    this.dbService.posts.subscribe(data => {
+      if (this.router.url === '/posts') {
+        this.router.navigate(['/posts/', data[0].key]);
+      }
+    });
   }
 
 }

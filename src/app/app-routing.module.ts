@@ -8,10 +8,16 @@ import {WelcomeResolver} from './auth/welcome/welcome.resolver';
 import {AuthGuard} from './shared/auth.guard';
 import {CreatePostComponent} from './blog/create-post/create-post.component';
 import {CreateGuard} from './shared/create.guard';
+import {PostComponent} from "./blog/post/post.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'posts', pathMatch: 'full' },
-  { path: 'posts', component: PostListComponent  },
+  {
+    path: 'posts', component: PostListComponent,
+    children: [
+      {path: ':postKey', component: PostComponent}
+    ]
+  },
   { path: 'create', component: CreatePostComponent, canActivate: [CreateGuard] },
   { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
@@ -20,7 +26,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled',
+      anchorScrolling: 'enabled',
+    })
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

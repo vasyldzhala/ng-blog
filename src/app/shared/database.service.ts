@@ -13,15 +13,25 @@ export class DatabaseService {
 
   constructor(public db: AngularFireDatabase) {
 
-    this.posts = db.list('/posts')
-      .snapshotChanges()
-      .pipe(map(
-        data => data.map( item => ({ key: item.payload.key, ...item.payload.val() }) )
-      ));
+    this.posts = this.getDataList('/posts');
+
   }
 
   postData(url: string, data: any) {
     console.log('post', data);
     return this.db.list(url).push(data);
+  }
+
+  getData(url) {
+    return this.db.object(url).snapshotChanges()
+      .pipe(map(item => ({key: item.payload.key, ...item.payload.val()})));
+  }
+
+  getDataList(url) {
+    return this.db.list(url)
+      .snapshotChanges()
+      .pipe(map(
+        data => data.map(item => ({key: item.payload.key, ...item.payload.val()}))
+      ));
   }
 }

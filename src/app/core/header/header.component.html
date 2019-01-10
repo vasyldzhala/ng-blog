@@ -1,13 +1,35 @@
 <nav class="header fx-row">
-  <a class="btn btn-link" routerLink="/posts"
-     routerLinkActive="active"
-     [routerLinkActiveOptions]="{exact: true}" >Blog</a>
-  <a *ngIf="userService.currentUser.name" class="btn btn-link" routerLink="/create" routerLinkActive="active">Create Post</a>
-  <a class="btn btn-link" routerLink="/login" routerLinkActive="active">Login</a>
-  <a class="btn btn-link" routerLink="/register" routerLinkActive="active">Register</a>
-  <a class="btn btn-link" routerLink="/welcome" routerLinkActive="active">Welcome</a>
-  <span *ngIf="userService.currentUser.name">
-    Welcome, {{userService.currentUser.name}}
-  </span>
+  <a
+    class="btn btn-link"
+    routerLink="/posts"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}"
+  >
+    Blog
+  </a>
+
+  <a
+    *ngIf="userService.currentUser.name"
+    class="btn btn-link"
+    routerLink="/create"
+    routerLinkActive="active"
+  >
+    Create Post
+  </a>
+
+  <a
+    class="btn btn-link"
+    routerLink="/welcome"
+    routerLinkActive="active"
+  >
+    <span *ngIf="userService.currentUser.name; else elseBlock">
+      <img class="author-image" src={{userService.currentUser.image}} alt="">
+      {{userService.currentUser.name}}
+    </span>
+    <ng-template #elseBlock>
+      Login/Regist
+    </ng-template>
+  </a>
+
 </nav>
 

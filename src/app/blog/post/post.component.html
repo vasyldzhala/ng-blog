@@ -1,0 +1,16 @@
+<div *ngIf="post">
+  <h2>{{post.title}}</h2>
+  <img class="post-image" src={{post.image}} alt="">
+  <h5>{{post.subject}}</h5>
+  <p>
+    <img class="author-image" src={{post.author.image}} alt="">
+    By {{post.author.name}},
+    {{post.date | date: 'longDate' }}
+  </p>
+  <hr>
+  <div class="post-text" [innerHTML]="post.text">
+  </div>
+
+  <app-comment-list></app-comment-list>
+
+</div>

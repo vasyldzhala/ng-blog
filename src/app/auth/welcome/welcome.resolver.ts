@@ -16,6 +16,7 @@ export class WelcomeResolver implements Resolve<any> {
     const user = {
       image: '',
       name: '',
+      email: '',
       provider: ''
     };
 
@@ -28,6 +29,7 @@ export class WelcomeResolver implements Resolve<any> {
             user.image = res.photoURL;
           }
           user.name = res.displayName;
+          user.email = res.email;
           user.provider = res.providerData[0].providerId;
           return resolve(user);
         }, err => {

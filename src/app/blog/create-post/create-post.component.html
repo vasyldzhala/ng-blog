@@ -1,39 +1,40 @@
-<div class="create-form-container">
-  <h2>Create New Post!</h2>
-  <form novalidate (ngSubmit)="publishPost(postForm)" [formGroup]="postForm">
+<div class="main-content-container">
+  <div class="create-form-container">
+    <h2>Create New Post!</h2>
+    <form novalidate (ngSubmit)="publishPost(postForm)" [formGroup]="postForm">
 
-    <div class="form-group">
-      <label>Title</label>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Enter post title"
-        formControlName="title">
-    </div>
+      <div class="form-group">
+        <label>Title</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter post title"
+          formControlName="title">
+      </div>
 
-    <div class="form-group">
-      <label>Subject</label>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Enter cuple words about theme"
-        formControlName="subject">
-    </div>
+      <div class="form-group">
+        <label>Subject</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter cuple words about theme"
+          formControlName="subject">
+      </div>
 
-    <div class="form-group">
-      <label>Image URL</label>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Main thumbnail image URL"
-        formControlName="image">
-    </div>
+      <div class="form-group">
+        <label>Image URL</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Main thumbnail image URL"
+          formControlName="image">
+      </div>
 
-    <div class="form-group">
-      <img class="create-form-image" src={{postForm.value.image}} alt="">
-    </div>
+      <div class="form-group">
+        <img class="create-form-image" src={{postForm.value.image}} alt="">
+      </div>
 
-    <div class="form-group">
+      <div class="form-group">
       <textarea
         class="form-control"
         rows="15"
@@ -41,17 +42,19 @@
         formControlName="text"
       >
       </textarea>
-    </div>
+      </div>
 
-    <div class="form-group">
-      <button
-        class="btn btn-primary btn-block"
-        type="submit"
-        [disabled]="postForm.invalid"
-      >
-        Publish Post
-      </button>
-    </div>
+      <div class="form-group">
+        <button
+          class="btn btn-primary btn-block"
+          type="submit"
+          [disabled]="postForm.invalid"
+        >
+          Publish Post
+        </button>
+      </div>
 
-  </form>
+    </form>
+  </div>
 </div>
+

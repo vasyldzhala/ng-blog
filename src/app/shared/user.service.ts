@@ -26,7 +26,6 @@ export class UserService {
     this.currentUser.provider = user.providerData[0].providerId;
     this.currentUser.image = user.photoURL;
     this.currentUser.id = user.uid;
-    console.log(this.currentUser);
   }
 
   getCurrentUser() {
