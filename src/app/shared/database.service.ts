@@ -15,16 +15,15 @@ export class DatabaseService {
   }
 
   postData( url: string, data: any ) {
-    console.log( 'post', data );
     return this.db.list( url ).push( data );
   }
 
-  getData( url ) {
+  getData( url: string ) {
     return this.db.object( url ).snapshotChanges()
       .pipe( map(item => ({ key: item.payload.key, ...item.payload.val() })));
   }
 
-  getDataList( url ) {
+  getDataList( url: string ): Observable<any[]> {
     return this.db.list( url )
       .snapshotChanges()
       .pipe( map(

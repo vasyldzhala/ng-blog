@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../shared/auth.service';
-import { UserService } from '../../shared/user.service';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators, AbstractControl} from '@angular/forms';
+import {AuthService} from '../../shared/auth.service';
+import {UserService} from '../../shared/user.service';
 
 @Component({
   selector: 'app-register',
@@ -16,23 +16,51 @@ export class RegisterComponent {
   successMessage = '';
   facebookErrorMessage = '';
   googleErrorMessage = '';
+  passportValidationRegex = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{6,}$';
 
-  constructor( public auth: AuthService,
-               private router: Router,
-               private fb: FormBuilder,
-               private userService: UserService ) {
+  constructor(public auth: AuthService,
+              private router: Router,
+              private fb: FormBuilder,
+              private userService: UserService) {
     this.createForm();
+  }
+
+  matchPassword ( abstractControl: AbstractControl ) {
+    const password = abstractControl.get( 'password' ).value;
+    const confirmPassword = abstractControl.get( 'confirmPassword' ).value;
+    if (password !== confirmPassword) {
+      abstractControl.get( 'confirmPassword' ).setErrors( { MatchPassword: true } );
+    } else {
+      return null;
+    }
   }
 
   createForm() {
     this.registerForm = this.fb.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required]
-    });
+        email: ['', [
+          Validators.required,
+          Validators.email
+        ]],
+        password: ['', [
+          Validators.required,
+          Validators.maxLength( 100 ),
+          Validators.pattern( this.passportValidationRegex )
+        ]],
+        confirmPassword: ['', [
+          Validators.required,
+          Validators.maxLength( 100 ),
+          Validators.pattern( this.passportValidationRegex )
+        ]]
+      },
+      {
+        validator: this.matchPassword
+      });
   }
 
-  registerUser( user ) {
-    this.auth.doRegister( user )
+
+
+  registerUser(user) {
+    this.auth.doRegister(user)
       .then(res => {
         this.errorMessage = '';
         this.successMessage = 'Your account has been created';

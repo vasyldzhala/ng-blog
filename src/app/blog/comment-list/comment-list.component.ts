@@ -14,7 +14,7 @@ export class CommentListComponent implements OnInit {
 
   commentForm: FormGroup;
   postKey: string;
-  comments: any;
+  comments: any = [];
 
   constructor(
     private fb: FormBuilder,

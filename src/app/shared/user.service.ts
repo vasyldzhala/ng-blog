@@ -28,7 +28,7 @@ export class UserService {
     this.currentUser.id = user.uid;
   }
 
-  getCurrentUser() {
+  getCurrentUser(): Promise<any> {
     return new Promise<any>(( resolve, reject ) => {
       firebase.auth().onAuthStateChanged(user => {
         if ( user ) {
@@ -42,7 +42,7 @@ export class UserService {
     });
   }
 
-  updateCurrentUser( value ) {
+  updateCurrentUser( value ): Promise<any> {
     return new Promise<any>(( resolve, reject ) => {
       const user = firebase.auth().currentUser;
       user.updateProfile({

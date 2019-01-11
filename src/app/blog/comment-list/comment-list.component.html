@@ -1,5 +1,9 @@
 <hr>
 <div>
+  <h5>Comments</h5>
+  <p *ngIf="!comments.length">
+    <small>No comments yet</small>
+  </p>
   <div class="form-group" *ngFor="let comment of comments">
     <img
       class="author-image"
@@ -19,7 +23,7 @@
 </div>
 
 
-<form novalidate [formGroup]="commentForm">
+<form *ngIf="userService.currentUser.email" novalidate [formGroup]="commentForm">
   <h5>Leave a comment</h5>
   <div class="form-group">
     <input

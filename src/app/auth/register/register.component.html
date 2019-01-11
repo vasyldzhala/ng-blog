@@ -15,6 +15,16 @@
           placeholder="Your email"
           formControlName="email"
         >
+        <div *ngIf="registerForm.invalid && registerForm.get('email').touched">
+          <label class="error"
+                 *ngIf="registerForm.get('email').hasError('required')" >
+            Email is required!
+          </label>
+          <label class="error"
+                 *ngIf="registerForm.get('email').hasError('email')">
+            Email is not valid!
+          </label>
+        </div>
       </div>
 
       <div class="form-group">
@@ -22,9 +32,49 @@
         <input
           class="form-control"
           type="password"
-          placeholder="Your password"
+          placeholder="Password"
           formControlName="password"
         >
+        <div *ngIf="registerForm.invalid && registerForm.get('password').touched">
+          <label class="error"
+                 *ngIf="registerForm.get('password').hasError('required')" >
+            Password is required!
+          </label>
+          <label class="error"
+                 *ngIf="registerForm.get('password').hasError('pattern')">
+            Password have to be minimum 6 characters,
+            at least one uppercase letter, one lowercase letter and one number.
+          </label>
+          <label class="error"
+                 *ngIf="registerForm.get('password').hasError('maxLength')" >
+            Password max length is 100 characters!
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Confirm password</label>
+        <input
+          class="form-control"
+          type="password"
+          placeholder="Confirm password"
+          formControlName="confirmPassword"
+        >
+
+        <div *ngIf="registerForm.invalid && registerForm.get('confirmPassword').touched">
+          <label class="error"
+                 *ngIf="registerForm.get('confirmPassword').hasError('required')" >
+            Confirm Password is required
+          </label>
+          <label class="error"
+                 *ngIf="registerForm.get('confirmPassword').hasError('MatchPassword')">
+            Confirm password not match
+          </label>
+        </div>
+
+      </div>
+
+      <div class="form-group">
         <label class="error">{{errorMessage}}</label>
         <label class="success">{{successMessage}}</label>
       </div>
@@ -44,7 +94,7 @@
       <div class="form-group">
         <button
           class="btn btn-dark btn-block"
-          (click)="tryFacebookLogin(registerForm.value)"
+          (click)="tryFacebookLogin()"
         >
           Sign In with Facebook Account
         </button>
@@ -54,7 +104,7 @@
       <div class="form-group">
         <button
           class="btn btn-danger btn-block"
-          (click)="tryGoogleLogin(registerForm.value)"
+          (click)="tryGoogleLogin()"
         >
           Sign In with Google Account
         </button>
